@@ -1,18 +1,12 @@
-{
-  "manifest_version": 2,
-  
-  "name": "JB Scroll No More",
-  "description": "Stop Jenkins Blue from auto-scrolling while a build is in progress.",
-  "version": "1.0",
-  
-  
-  "permissions": [
-    "https://mn2svlrdb001sd0:8443/sse-gateway/*",
-    "<all_urls>",
-    "webRequest",
-    "webRequestBlocking"
-  ],
-  
-  "background": {
-	  "scripts": ["redirect_file.js"]}
-}
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        if (details.url.match(/^.*\b(jenkins-js-extension.)\b.*$/))
+            return {
+                redirectUrl: "http://mn2svlmte023sd0:8000/jenkins-js-extension.js"
+            };
+    }, {
+        urls: ["https://mn2svlrdb001sd0:8443/adjuncts/2c60720f/org/jenkins/ui/jsmodules/blueocean-dashboard/*",
+		       "https://mn2svlrdb001sd0:8443/adjuncts/568855d9/org/jenkins/ui/jsmodules/blueocean-dashboard/*",
+			   "https://mn2svlrdb001sd0:8443/adjuncts/*/org/jenkins/ui/jsmodules/blueocean-dashboard/*"]
+    },
+    ["blocking"]);
