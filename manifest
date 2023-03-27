@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  
+  "name": "JB Scroll No More",
+  "description": "Stop Jenkins Blue from auto-scrolling while a build is in progress.",
+  "version": "1.0",
+  
+  
+  "permissions": [
+    "https://mn2svlrdb001sd0:8443/sse-gateway/*",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  
+  "background": {
+	  "scripts": ["redirect_file.js"]}
+}
